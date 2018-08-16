@@ -1,3 +1,25 @@
-.container {
+.jumbotron {
     text-align: center;
+}
+
+nav {
+    text-align: center;
+}
+
+.form {
+    width: 75%;
+    margin: auto;
+}
+
+#UserSearchInput {
+    height: 80px;
+    font-size: 50px;
+}
+
+#trailMap {
+    float: left;
+}
+
+#trailInfo {
+    float: right;
 }
