@@ -1,25 +1,40 @@
 .jumbotron {
     text-align: center;
-}
+    margin: auto;
+    margin-bottom: 2rem;
+    background-image: url("../jumbotron.jpg");
+    background-size: 1700px 400px;
 
-nav {
-    text-align: center;
 }
 
 .form {
-    width: 75%;
+    width: 60rem;
     margin: auto;
 }
 
 #UserSearchInput {
-    height: 80px;
-    font-size: 50px;
+    height: 5rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
 }
 
 #trailMap {
     float: left;
+    margin-left: 5rem;
 }
 
 #trailInfo {
     float: right;
+    margin-right: 5rem;
 }
+
+.lead {
+    font-style: italic;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+
+
