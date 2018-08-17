@@ -1,13 +1,13 @@
 $(document).ready(function()
 {
-    $("#test").on("submit", function(event)
+    $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
 
         var lat = "";
         var long = "";
 
-        var location = $("#test")[0][0].value;
+        var location = $("#UserSearchInput").val();
         console.log(location);
 
         var googleMapsQueryURL = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&address=" + location;
@@ -36,6 +36,8 @@ $(document).ready(function()
                 method: "GET"
             }).then(function(response)
             {
+                
+
                 // function initMap() {
 
                 //     var map = new google.maps.Map(document.getElementById('map'), {
