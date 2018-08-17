@@ -35,29 +35,31 @@
     <div id="trailMap">Map Photo</div>
 
     <div id="trailInfo" class="card" style="width: 30rem;">
-        <img id="selectedTrailPhoto" class="card-img-top" src="assets/adventure-alps-backpack-554609.jpg" alt="Card image cap">
+        <img id="selectedTrailPhoto" class="card-img-top" src="assets/images/adventure-alps-backpack-554609.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">
                 <span class="hikeName">Hike Name</span>
             </h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Hike this Trail!
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hikeInformation">
+                Trail Information
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hikedForm">
+                I Just Hiked This Trail!
             </button>
 
         </div>
     </div>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="hikeInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" class="hikeName">Hike Name</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    Length: 
+                    Elevation Gain:
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,7 +67,22 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="hikedForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" class="hikeName">I Just Hiked This Trail!</h5>
+                </div>
+                <div class="modal-body">
+                  Form Goes Here!
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
