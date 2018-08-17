@@ -8,26 +8,16 @@
 }
 
 .form {
-    width: 60rem;
+    width: 75%;
     margin: auto;
 }
 
 #UserSearchInput {
     height: 5rem;
-    font-size: 3.5rem;
+    font-size: 250%;
     margin-bottom: 1.5rem;
 }
 
-#trailMap {
-    float: left;
-    margin-left: 5rem;
-    width: 55%;
-}
-
-#trailInfo {
-    float: right;
-    margin-right: 5rem;
-}
 
 .lead {
     font-style: italic;
@@ -36,7 +26,4 @@
 h1 {
     font-size: 4rem;
 }
-
-
-
 
