@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta>
+    <Title>ZeroMark</Title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">;
 </head>
-<Title>ZeroMark</Title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/sandstone/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/style.css">;
+
 
 <body>
     <h1>I have gas!</h1>
@@ -41,13 +43,22 @@
     </div>
 
     <div>
-            <form class="form my-2 my-lg-0">
+        <form class="form my-2 my-lg-0" id="test"  >
 
-                    <input id="UserSearchInput" class="form-control mr-sm-2" type="search" placeholder="Where are you hiking today?" aria-label="Search">
-                    <!-- <button id="SearchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-                  </form> 
+            <input id="UserSearchInput" class="form-control mr-sm-2" type="search" placeholder="Where are you hiking today? " aria-label="Search">
+            <!-- <button id="SearchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        </form>
     </div>
     <div id="trailMap">Map Photo</div>
-    <div id= "trailInfo">Trail Info</div>
 
+    <div id="trailInfo" class="card" style="width: 30rem;">
+        <img id="selectedTrailPhoto" class="card-img-top" src="assets/adventure-alps-backpack-554609.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
