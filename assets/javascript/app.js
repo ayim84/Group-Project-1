@@ -61,7 +61,8 @@ $(document).ready(function()
             
                     // Add a marker clusterer to manage the markers.
                     var markerCluster = new MarkerClusterer(map, markers,
-                        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                        // {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                        {imagePath: '../assets/images/markers'});
                   }
 
                   var locations = [];
