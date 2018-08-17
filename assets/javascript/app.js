@@ -1,11 +1,11 @@
 $(document).ready(function()
 {
-    $("#SearchButton").on("submit", function()
+    $("#UserSearchInput").on("submit", function()
     {
         var location = $(this).val();
         console.log = location;
 
-        var googleMapsQueryURL = "http://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&address&address=" + location;
+        var googleMapsQueryURL = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&address=" + location;
 
         var lat = "";
         var long = "";
