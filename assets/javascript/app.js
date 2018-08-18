@@ -1,11 +1,14 @@
 $(document).ready(function()
 {
+
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
 
         var lat = "";
         var long = "";
+        
+        var trailLocations = [];
 
         var location = $("#UserSearchInput").val();
         console.log(location);
@@ -38,40 +41,24 @@ $(document).ready(function()
             {
                 console.log(response.trails[0]);
 
-                function initMap() {
+                for(var i = 0; i < response.trails.length; i++)
+                {
+                    trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})                      
+                }
+                console.log(trailLocations);
 
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                      zoom: 3,
-                      center: {lat: lat, long}
-                    });
+                var newMap = $("<img>");
             
-                    // Create an array of alphabetical characters used to label the markers.
-                    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            
-                    // Add some markers to the map.
-                    // Note: The code uses the JavaScript Array.prototype.map() method to
-                    // create an array of markers based on a given "locations" array.
-                    // The map() method here has nothing to do with the Google Maps API.
-                    var markers = locations.map(function(location, i) {
-                      return new google.maps.Marker({
-                        position: location,
-                        label: labels[i % labels.length]
-                      });
-                    });
-            
-                    // Add a marker clusterer to manage the markers.
-                    var markerCluster = new MarkerClusterer(map, markers,
-                        // {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-                        {imagePath: '../assets/images/markers'});
-                  }
+                newMap.attr(
+                {
+                    "src": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&center=" + lat + "," + long + "&size=600x450&maptype=roadmap&markers=color:blue%7Clabel:A%7C" + response.trails[0].latitude + "," + response.trails[0].longitude + "&markers=color:red%7Clabel:B%7C" + response.trails[1].latitude + "," + response.trails[1].longitude + "&markers=color:green%7Clabel:C%7C" + response.trails[2].latitude + "," + response.trails[2].longitude + "&markers=color:orange%7Clabel:D%7C" + response.trails[3].latitude + "," + response.trails[3].longitude + "&markers=color:black%7Clabel:E%7C" + response.trails[4].latitude + "," + response.trails[4].longitude + "&markers=color:brown%7Clabel:F%7C" + response.trails[5].latitude + "," + response.trails[5].longitude + "&markers=color:purple%7Clabel:G%7C" + response.trails[6].latitude + "," + response.trails[6].longitude + "&markers=color:gray%7Clabel:H%7C" + response.trails[7].latitude + "," + response.trails[7].longitude + "&markers=color:yellow%7Clabel:I%7C" + response.trails[8].latitude + "," + response.trails[8].longitude + "&markers=color:white%7Clabel:J%7C" + response.trails[9].latitude + "," + response.trails[9].longitude
+                });
+                
+                $("#trailMap").html(newMap);
 
-                  var locations = [];
-
-                  for(var i = 0; i < response.trails.length; i++)
-                  {
-                      locations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})                      
-                  }
-                  console.log(locations);
+                $("#UserSearchInput").val("");
+      
+                console.log(newMap.attr("src"));
             });
         });
     });
