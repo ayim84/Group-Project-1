@@ -10,7 +10,6 @@ $(document).ready(function()
         
         var trailLocations = [];
 
-
         var location = $("#UserSearchInput").val();
         console.log(location);
 
@@ -48,8 +47,6 @@ $(document).ready(function()
                 }
                 console.log(trailLocations);
 
-                // $("#trailMap").text("poop");
-
                 var newMap = $("<img>");
             
                 newMap.attr(
@@ -58,6 +55,8 @@ $(document).ready(function()
                 });
                 
                 $("#trailMap").html(newMap);
+
+                $("#UserSearchInput").val("");
       
                 console.log(newMap.attr("src"));
             });
