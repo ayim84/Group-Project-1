@@ -75,10 +75,10 @@ $(document).ready(function()
                 {
                     trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})
 
-                    
+                    var trailDiv = $("<div>")
                     var trailList = $("<ul>");
                     var trailName = $("<p>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
-                    var trailSummary = $("<li>").text(response.trails[i].summary);
+                    var trailSummary = $("<li>").text(response.trails[i].summary); 
                     var trailLocation = $("<li>").text(response.trails[i].location);
 
                     trailList.append(trailSummary);
