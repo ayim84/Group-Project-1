@@ -1,3 +1,15 @@
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAZqzebB-sUFbmJ3RlEJzm_QZWP_FQwNbI",
+    authDomain: "zero-mark-project-1.firebaseapp.com",
+    databaseURL: "https://zero-mark-project-1.firebaseio.com",
+    projectId: "zero-mark-project-1",
+    storageBucket: "",
+    messagingSenderId: "1001665569926"
+  };
+  firebase.initializeApp(config);
+
+
 var lat = 39.7392358;
 var long = -104.990251;
 var trailLocations = [
