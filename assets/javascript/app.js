@@ -77,8 +77,9 @@ $(document).ready(function()
 
                     var trailDiv = $("<div>")
                     var trailList = $("<ul>");
-                    var trailName = $("<p>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
-                    var trailSummary = $("<li>").text(response.trails[i].summary); 
+                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
+                    trailName.attr("id", i);
+                    var trailSummary = $("<li>").text(response.trails[i].summary);
                     var trailLocation = $("<li>").text(response.trails[i].location);
 
                     trailList.append(trailSummary);
@@ -89,7 +90,18 @@ $(document).ready(function()
                 }
                 console.log(trailLocations);
 
-                
+                $(document).on("click", ".clickedHike", function(){
+                    var id = $(this).attr("id");
+                    $(".hikeName").text(response.trails[id].name);
+                    $(".card-text").text(response.trails[id].summary);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
+                    $("#mileage").text("Miles: " + response.trails[id].length);
+                    $("#elevationGain").text("Elevation Gain: ");
+                    $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
+                    $("#stars").text("Stars: " + response.trails[id].stars);
+                });
+                   
 
                 // var newMap = $("<img>");
             
