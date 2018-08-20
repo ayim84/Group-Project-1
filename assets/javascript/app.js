@@ -76,7 +76,8 @@ $(document).ready(function()
 
                     
                     var trailList = $("<ul>");
-                    var trailName = $("<p>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
+                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": >" + response.trails[i].name + "</a>");
+                    trailName.attr("id", i);
                     var trailSummary = $("<li>").text(response.trails[i].summary);
                     var trailLocation = $("<li>").text(response.trails[i].location);
 
@@ -88,7 +89,34 @@ $(document).ready(function()
                 }
                 console.log(trailLocations);
 
-                $("#UserSearchInput").val("");  
+                $(document).on("click", ".clickedHike", function(){
+                    var id = $(this).attr("id");
+                    $(".hikeName").text(response.trails[id].name);
+                    $(".card-text").text(response.trails[id].summary);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
+                    $("#mileage").text("Miles: " + response.trails[id].length);
+                    $("#elevationGain").text("Elevation Gain: ");
+                    $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
+                    $("#stars").text("Stars: " + response.trails[id].stars);
+
+                    var googleDirections= $("<iframe allowfullscreen>");
+                    googleDirections.attr
+                    (
+                        {
+                            "width": "600",
+                            "height": "450",
+                            "frameborder": "0",
+                            "style": "border: 0",
+                            "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + response.trails[id].latitude + "," + response.trails[id].longitude,
+                        }
+                    )
+                    console.log(googleDirections);
+                    $("#directions").html(googleDirections);
+                });
+                   
+                $("#UserSearchInput").val("");
+      
 
                 $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&callback=initMap');
 
