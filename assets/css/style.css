@@ -22,7 +22,7 @@ body {
     height: 5rem;
     font-size: 3.5vw;
     margin-bottom: 1.5rem;
-    
+
 
 }
 
@@ -76,5 +76,17 @@ h2 {
 
 #footer-text {
     font-family: 'Holtwood One SC', serif;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.modal-body{
+    margin-right:3%;
+}
+
+.selectedTrailPhoto {
+    margin: auto;
 }
 

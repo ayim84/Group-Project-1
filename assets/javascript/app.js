@@ -88,7 +88,18 @@ $(document).ready(function()
 
                 for(var i = 0; i < response.trails.length; i++)
                 {
-                    trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})
+                    trailLocations.push(
+                        {
+                            lat: response.trails[i].latitude, 
+                            lng: response.trails[i].longitude,
+                            name: response.trails[i].name,
+                            summary: response.trails[i].summary,
+                            image: response.trails[i].imgSmallMed,
+                            length: response.trails[i].length,
+                            ascent: response.trails[i].ascent,
+                            difficulty: response.trails[i].difficulty,
+                            stars: response.trails[i].stars
+                        })
 
                     
                     var trailDiv = $("<div>");
@@ -146,7 +157,8 @@ $(document).ready(function()
     });
 });
 
-function initMap() {
+function initMap() 
+{
     console.log("Lat for current Google Map: " + lat + " Long for current Google Map: " + long);
 
     var map = new google.maps.Map(document.getElementById('trailMap'), {
@@ -162,27 +174,34 @@ function initMap() {
     // create an array of markers based on a given "locations" array.
     // The map() method here has nothing to do with the Google Maps API.
     var markers = trailLocations.map(function(location, i) {
-      return new google.maps.Marker({
+        console.log(location);
+      var marker = new google.maps.Marker({
         position: location,
-        label: labels[i % labels.length]
+        label: labels[i % labels.length],
+        name: location.name,
+        summary: location.summary,
+        image: location.image,
+        length: location.length,
+        ascent: location.ascent,
+        difficulty: location.difficulty,
+        stars: location.stars
       });
+
+      google.maps.event.addListener(marker, 'click', function() 
+      {
+          console.log("Marker Click Found!");
+          console.log(this);
+          // map.setZoom(8);
+          // map.setCenter(marker.getPosition());
+      });
+
+      return marker;
     });
 
     // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-//   var locations = [
-//     {lat: 39.9787, lng: -105.2755},
-//     {lat: 39.9511, lng: -105.3378},
-//     {lat: 39.9997, lng: -105.2979},
-//     {lat: 40.02, lng: -105.2979},
-//     {lat: 40.0202, lng: -105.2977},
-//     {lat: 39.9388, lng: -105.2582},
-//     {lat: 39.9975, lng: -105.2928},
-//     {lat: 39.7736, lng: -105.2541},
-//     {lat: 39.7169, lng: -105.3156},
-//     {lat: 39.8505, lng: -105.3606}
-//   ]
+};
 
 // SHARE YOUR HIKE SUBMISSION
 
@@ -218,4 +237,3 @@ function initMap() {
     
 
   });
-};
