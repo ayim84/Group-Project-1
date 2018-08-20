@@ -8,7 +8,11 @@
     messagingSenderId: "1001665569926"
   };
   firebase.initializeApp(config);
+  
+  var database = firebase.database();
 
+// END FIREBASE INITIALIZATION
+  
 
 var lat = 39.7392358;
 var long = -104.990251;
@@ -166,4 +170,51 @@ function initMap() {
     // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-  }
+//   var locations = [
+//     {lat: 39.9787, lng: -105.2755},
+//     {lat: 39.9511, lng: -105.3378},
+//     {lat: 39.9997, lng: -105.2979},
+//     {lat: 40.02, lng: -105.2979},
+//     {lat: 40.0202, lng: -105.2977},
+//     {lat: 39.9388, lng: -105.2582},
+//     {lat: 39.9975, lng: -105.2928},
+//     {lat: 39.7736, lng: -105.2541},
+//     {lat: 39.7169, lng: -105.3156},
+//     {lat: 39.8505, lng: -105.3606}
+//   ]
+
+// SHARE YOUR HIKE SUBMISSION
+
+  // HIKE SHARE SUBMIT BUTTON
+  $("#submitHike-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    
+  
+    // Grabs user input
+    var hikerName = $("#hiker-name").val().trim();
+    var startTime = $("#start-time").val().trim();
+    var endTime = $("#end-time").val().trim();
+    
+  
+    // Creates local "temporary" object for holding hike data
+    var logHike = {
+      name: hikerName,
+      start: startTime,
+      end: endTime
+    };
+  
+    
+  
+    // Uploads employee data to the database
+    database.ref().push(logHike);
+
+//    TEMP FOR TESTING
+    console.log(hikerName);
+    console.log(startTime);
+    console.log(endTime);
+
+    
+
+  });
+
