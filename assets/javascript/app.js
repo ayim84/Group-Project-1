@@ -20,11 +20,8 @@ $(document).ready(function()
     {
         event.preventDefault();
 
-
-        
-
         var location = $("#UserSearchInput").val();
-        console.log(location);
+        console.log("User Inputted Location: " + location);
 
         var googleMapsQueryURL = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&address=" + location;
 
@@ -35,12 +32,12 @@ $(document).ready(function()
         }).then(function(response)
         {
             var googleMapsResults = response.results[0];
-            console.log(googleMapsResults);  
+            console.log("Google Maps API Return: " + googleMapsResults);  
 
             lat = googleMapsResults.geometry.location.lat;
             long = googleMapsResults.geometry.location.lng;
-            console.log(lat);
-            console.log(long);
+            console.log("Latitude from User Input: " + lat);
+            console.log("Longitude from user Input: " + long);
     
             var hikingProjectQueryURL = "https://www.hikingproject.com/data/get-trails?key=200337065-b63aa83fc2f455dc1c697f8710938ca8&lat=" + lat + "&lon=" + long;
     
@@ -54,13 +51,45 @@ $(document).ready(function()
             {
                 console.log(response.trails[0]);
 
-                trailLocations = [];    
+                var trailNumber = 
+                {
+                    0: "A",
+                    1: "B",
+                    2: "C",
+                    3: "D",
+                    4: "E",
+                    5: "F",
+                    6: "G",
+                    7: "H",
+                    8: "I",
+                    9: "J"
+                };
+
+                console.log(trailNumber["0"]);
+
+                trailLocations = [];  
+                
+                $("#trails").text("");
 
                 for(var i = 0; i < response.trails.length; i++)
                 {
-                    trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})                      
+                    trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})
+
+                    
+                    var trailList = $("<ul>");
+                    var trailName = $("<p>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
+                    var trailSummary = $("<li>").text(response.trails[i].summary);
+                    var trailLocation = $("<li>").text(response.trails[i].location);
+
+                    trailList.append(trailSummary);
+                    trailList.append(trailLocation);
+
+                    $("#trails").append(trailName);
+                    $("#trails").append(trailList);
                 }
                 console.log(trailLocations);
+
+                
 
                 // var newMap = $("<img>");
             
@@ -84,7 +113,7 @@ $(document).ready(function()
 });
 
 function initMap() {
-    console.log("Lat: " + lat + " Long: " + long);
+    console.log("Lat for current Google Map: " + lat + " Long for current Google Map: " + long);
 
     var map = new google.maps.Map(document.getElementById('trailMap'), {
       zoom: 9,
