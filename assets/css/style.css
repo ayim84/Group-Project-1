@@ -1,15 +1,24 @@
+body {
+    margin-top: 0;
+    background-color: slategrey;
+    
+    
+}
 .jumbotron {
     text-align: center;
     margin: auto;
-    margin-bottom: 2rem;
-    background-image: url("../images/jumbotron.jpg");
-    background-size: 1700px 400px;
-
+    background-image: url("../images/jumbotron2.jpg");
+    background-size: 100%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    margin-bottom: 1%;
+    background-repeat: no-repeat;
 }
 
 .form {
     width: 75%;
     margin: auto;
+
 }
 
 #UserSearchInput {
@@ -21,9 +30,17 @@
 
 .lead {
     font-style: italic;
+    color: white;
+    text-align: center;
 }
 
 h1 {
     font-size: 4rem;
+    color: black;
+
+}
+
+button {
+    margin-bottom: 2%;
 }
 
