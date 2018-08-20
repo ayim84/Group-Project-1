@@ -29,7 +29,6 @@ var trailLocations = [
     {lat: 39.8505, lng: -105.3606}
 ];
 
-
 $(document).ready(function()
 {
     $("#searchForm").on("submit", function(event)
@@ -94,7 +93,7 @@ $(document).ready(function()
                     
                     var trailDiv = $("<div>");
                     var trailList = $("<ul>");
-                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
+                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": >" + response.trails[i].name + "</a>");
                     trailName.attr("id", i);
                     var trailSummary = $("<li>").text(response.trails[i].summary);
                     var trailLocation = $("<li>").text(response.trails[i].location);
@@ -120,20 +119,22 @@ $(document).ready(function()
                     $("#elevationGain").text("Elevation Gain: ");
                     $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
                     $("#stars").text("Stars: " + response.trails[id].stars);
+
+                    var googleDirections= $("<iframe allowfullscreen>");
+                    googleDirections.attr
+                    (
+                        {
+                            "width": "600",
+                            "height": "450",
+                            "frameborder": "0",
+                            "style": "border: 0",
+                            "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + response.trails[id].latitude + "," + response.trails[id].longitude,
+                        }
+                    )
+                    console.log(googleDirections);
+                    $("#directions").html(googleDirections);
                 });
                    
-
-                // var newMap = $("<img>");
-            
-                // newMap.attr(
-                // {
-                //     "src": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&center=" + lat + "," + long + "&size=600x450&maptype=roadmap&markers=color:blue%7Clabel:A%7C" + response.trails[0].latitude + "," + response.trails[0].longitude + "&markers=color:red%7Clabel:B%7C" + response.trails[1].latitude + "," + response.trails[1].longitude + "&markers=color:green%7Clabel:C%7C" + response.trails[2].latitude + "," + response.trails[2].longitude + "&markers=color:orange%7Clabel:D%7C" + response.trails[3].latitude + "," + response.trails[3].longitude + "&markers=color:black%7Clabel:E%7C" + response.trails[4].latitude + "," + response.trails[4].longitude + "&markers=color:brown%7Clabel:F%7C" + response.trails[5].latitude + "," + response.trails[5].longitude + "&markers=color:purple%7Clabel:G%7C" + response.trails[6].latitude + "," + response.trails[6].longitude + "&markers=color:gray%7Clabel:H%7C" + response.trails[7].latitude + "," + response.trails[7].longitude + "&markers=color:yellow%7Clabel:I%7C" + response.trails[8].latitude + "," + response.trails[8].longitude + "&markers=color:white%7Clabel:J%7C" + response.trails[9].latitude + "," + response.trails[9].longitude
-                // });
-                
-                //$("#trailMap").html(newMap);
-                // console.log(newMap.attr("src"));
-
-
                 $("#UserSearchInput").val("");
       
 
@@ -169,7 +170,6 @@ function initMap() {
     // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-  }
 //   var locations = [
 //     {lat: 39.9787, lng: -105.2755},
 //     {lat: 39.9511, lng: -105.3378},
@@ -217,3 +217,4 @@ function initMap() {
     
 
   });
+
