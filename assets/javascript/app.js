@@ -75,7 +75,8 @@ $(document).ready(function()
                 {
                     trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})
 
-                    var trailDiv = $("<div>")
+                    
+                    var trailDiv = $("<div>");
                     var trailList = $("<ul>");
                     var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
                     trailName.attr("id", i);
@@ -85,8 +86,11 @@ $(document).ready(function()
                     trailList.append(trailSummary);
                     trailList.append(trailLocation);
 
+                    trailDiv.append(trailName);
+                    trailDiv.append(trailList);
+
                     $("#trails").append(trailName);
-                    $("#trails").append(trailList);
+                    $("#trails").append(trailList,);
                 }
                 console.log(trailLocations);
 

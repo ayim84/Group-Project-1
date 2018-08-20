@@ -23,7 +23,7 @@ body {
 
 #UserSearchInput {
     height: 5rem;
-    font-size: 250%;
+    font-size: 3.5vw;
     margin-bottom: 1.5rem;
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 7vw;
     color: black;
 
 }
