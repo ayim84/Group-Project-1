@@ -84,7 +84,7 @@ $(document).ready(function()
 
                 trailLocations = [];  
                 
-                $("#trails").text("");
+                $("#trails").html("<h3>Pick a Hike!</h3>");
 
                 for(var i = 0; i < response.trails.length; i++)
                 {
@@ -93,7 +93,7 @@ $(document).ready(function()
                     
                     var trailDiv = $("<div>");
                     var trailList = $("<ul>");
-                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": >" + response.trails[i].name + "</a>");
+                    var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": " + response.trails[i].name + "</a>");
                     trailName.attr("id", i);
                     var trailSummary = $("<li>").text(response.trails[i].summary);
                     var trailLocation = $("<li>").text(response.trails[i].location);
@@ -104,8 +104,9 @@ $(document).ready(function()
                     trailDiv.append(trailName);
                     trailDiv.append(trailList);
 
+            
                     $("#trails").append(trailName);
-                    $("#trails").append(trailList,);
+                    $("#trails").append(trailList);
                 }
                 console.log(trailLocations);
 
@@ -217,4 +218,4 @@ function initMap() {
     
 
   });
-
+};
