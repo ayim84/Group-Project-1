@@ -1,3 +1,15 @@
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAZqzebB-sUFbmJ3RlEJzm_QZWP_FQwNbI",
+    authDomain: "zero-mark-project-1.firebaseapp.com",
+    databaseURL: "https://zero-mark-project-1.firebaseio.com",
+    projectId: "zero-mark-project-1",
+    storageBucket: "",
+    messagingSenderId: "1001665569926"
+  };
+  firebase.initializeApp(config);
+
+
 var lat = 39.7392358;
 var long = -104.990251;
 var trailLocations = [
@@ -75,6 +87,7 @@ $(document).ready(function()
                     trailLocations.push({lat: response.trails[i].latitude, lng: response.trails[i].longitude})
 
                     
+                    var trailDiv = $("<div>");
                     var trailList = $("<ul>");
                     var trailName = $("<p data-toggle='modal' data-target='#hikeInformation' class='clickedHike'>").html("<a href='#'>" + trailNumber[i] + ": >" + response.trails[i].name + "</a>");
                     trailName.attr("id", i);
@@ -84,8 +97,11 @@ $(document).ready(function()
                     trailList.append(trailSummary);
                     trailList.append(trailLocation);
 
+                    trailDiv.append(trailName);
+                    trailDiv.append(trailList);
+
                     $("#trails").append(trailName);
-                    $("#trails").append(trailList);
+                    $("#trails").append(trailList,);
                 }
                 console.log(trailLocations);
 
