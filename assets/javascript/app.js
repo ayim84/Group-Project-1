@@ -8,7 +8,11 @@
     messagingSenderId: "1001665569926"
   };
   firebase.initializeApp(config);
+  
+  var database = firebase.database();
 
+// END FIREBASE INITIALIZATION
+  
 
 var lat = 39.7392358;
 var long = -104.990251;
@@ -178,3 +182,38 @@ function initMap() {
 //     {lat: 39.7169, lng: -105.3156},
 //     {lat: 39.8505, lng: -105.3606}
 //   ]
+
+// SHARE YOUR HIKE SUBMISSION
+
+  // HIKE SHARE SUBMIT BUTTON
+  $("#submitHike-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    
+  
+    // Grabs user input
+    var hikerName = $("#hiker-name").val().trim();
+    var startTime = $("#start-time").val().trim();
+    var endTime = $("#end-time").val().trim();
+    
+  
+    // Creates local "temporary" object for holding hike data
+    var logHike = {
+      name: hikerName,
+      start: startTime,
+      end: endTime
+    };
+  
+    
+  
+    // Uploads employee data to the database
+    database.ref().push(logHike);
+
+//    TEMP FOR TESTING
+    console.log(hikerName);
+    console.log(startTime);
+    console.log(endTime);
+
+    
+
+  });

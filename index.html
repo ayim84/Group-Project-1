@@ -81,8 +81,9 @@
                         <div id="weather">Weather</div>
                         <div id="directions">Directions</div>
                     </div>
+                    <!-- HIKE INFO BUTTON-->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn-hikeInfo" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -92,30 +93,31 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="hikeName">Hike Name</h5>
+                        <h5 class="hikeName">Share Your Hike!</h5>
                     </div>
                     <div class="modal-body">
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Your name please">
+                            <input type="text" id="hiker-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Your name please">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Start Time</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="When did your trip start?">
+                            <input type="text" id="start-time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="What time did you start your hike?">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">End Time</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="When did your trip end?">
+                            <input type="text" id="end-time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="What time did you finish your hike?">
                         </div>
                     </div>
+                    <!-- SHARE HIKE BUTTON -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="submitHike-btn" class="btn-submitHike" data-dismiss="modal">Submit</button>
                     </div>
                 </div>
             </div>
