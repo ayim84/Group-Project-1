@@ -69,7 +69,7 @@ $(document).ready(function()
 
                 trailLocations = [];  
                 
-                $("#trails").text("");
+                $("#trails").html("<h3>Pick a Hike!</h3>");
 
                 for(var i = 0; i < response.trails.length; i++)
                 {
@@ -89,8 +89,9 @@ $(document).ready(function()
                     trailDiv.append(trailName);
                     trailDiv.append(trailList);
 
+            
                     $("#trails").append(trailName);
-                    $("#trails").append(trailList,);
+                    $("#trails").append(trailList);
                 }
                 console.log(trailLocations);
 
