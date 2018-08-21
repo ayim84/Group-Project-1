@@ -34,6 +34,7 @@ var currentHike; //This is the object that has the trail data
 
 $(document).ready(function()
 {
+  
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
@@ -135,8 +136,8 @@ $(document).ready(function()
 
                     $(".hikeName").text(response.trails[id].name);
                     $(".card-text").text(response.trails[id].summary);
-                    $("#trailInfoImage").attr("src", response.trails[id].imgMedium);
-                    $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $(".card-img-top").attr("src", response.trails[id].imgSmall);
                     $("#mileage").text("Miles: " + response.trails[id].length);
                     $("#elevationGain").text("Elevation Gain: " + response.trails[id].ascent + "'");
                     $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
