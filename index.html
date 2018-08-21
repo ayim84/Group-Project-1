@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Firebase Link -->
     <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+
+    <!-- Moment.js Link -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 
 
@@ -101,45 +104,35 @@
     </div>
     </div>
 
-        <div class="modal fade" id="hikedForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="hikeName">Share Your Hike!</h5>
+    <div class="modal fade" id="hikedForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="hikeName">Share Your Hike!</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                        </div>
+                        <input type="text" id="hiker-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                            placeholder="Your name please">
                     </div>
-                    <div class="modal-body">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
-                            </div>
-                            <input type="text" id="hiker-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Your name please">
-                        </div>
 
+                    <!-- HIKE START TIME INPUT -->
+                    <div class="control">
+                        <label for="appt-time">Hike Start Time:</label>
+                        <input type="time" id="start-time" />
+                    </div>
 
-<!-- HIKE START TIME INPUT -->
-                       
-
-                        <div class="control">
-                            <label for="appt-time">Hike Start Time:</label>
-                            <input type="time" id="start-time"/>
-                        </div>
-
-
-
-<!-- HIKE END TIME INPUT -->
-                        
-
+                    <!-- HIKE END TIME INPUT -->
                     <div class="control">
                         <label for="appt-time">Hike End Time:</label>
-                        <input type="time" id="end-time"/>
+                        <input type="time" id="end-time" />
                     </div>
 
-
-                    <!-- SHARE HIKE BUTTON -->
-                    <div class="modal-footer">
-                        <button type="button" id="submitHike-btn" class="btn-submitHike" data-dismiss="modal">Submit</button>
-                    </div>
                 </div>
+                
                 <!-- SHARE HIKE BUTTON -->
                 <div class="modal-footer">
                     <button type="button" id="submitHike-btn" class="btn-submitHike" data-dismiss="modal">Submit</button>

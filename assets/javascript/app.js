@@ -1,4 +1,7 @@
-  // Initialize Firebase
+$(document).ready(function()
+{
+ 
+ // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAZqzebB-sUFbmJ3RlEJzm_QZWP_FQwNbI",
     authDomain: "zero-mark-project-1.firebaseapp.com",
@@ -30,8 +33,7 @@ var trailLocations = [
     {lat: 39.8505, lng: -105.3606}
 ];
 
-$(document).ready(function()
-{
+
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
@@ -154,7 +156,7 @@ $(document).ready(function()
             });
         });
     });
-});
+
 
 function initMap() 
 {
@@ -237,26 +239,60 @@ function initMap()
     var endTime = $("#end-time").val();
     
   
-    // Creates local "temporary" object for holding hike data
+    // Creates local "temporary" object for holding hike data (from Firebase I think...)
     var logHike = {
       name: hikerName,
       start: startTime,
       end: endTime,
       timestamp: firebase.database.ServerValue.TIMESTAMP
     };
-  
-    
-  
+   
     // Uploads employee data to the database
     database.ref().push(logHike);
 
     console.log(logHike)
 
-//    TEMP FOR TESTING
-    console.log(hikerName);
-    console.log(startTime);
-    console.log(endTime);
+  }) 
+
+// Create Firebase event for adding hike to the database and a row in the html when a user adds an entry
+database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+
+    
+    // Store everything into a variable.
+    var hikerName = childSnapshot.val().name;
+    var startTime = childSnapshot.val().start;
+    var endTime = childSnapshot.val().end;
+    var hikeDate = childSnapshot.val().timestamp;
+    
+    
+    
+    var hikeLength = moment(endTime,"HH:mm").diff(moment(startTime,"HH:mm"),"minutes");
+    var hikeHours = Math.floor(hikeLength / 60);
+    var hikeMinutes = (hikeLength % 60);
+    var formattedHikeTime = (hikeHours + " hrs " + hikeMinutes + " min");
+    var avgSpeed = (DISTANCE / hikeLength) * 60;
 
 
+console.log(hikerName);
+// console.log(HIKENAME);
+console.log(moment(hikeDate).format("MMM Do YYYY")); 
+// console.log(HIKEDISTANCE);
+console.log(formattedHikeTime);
+console.log(avgSpeed);
 
-  });
+
+ 
+    // Create the new row
+//   var newRow = $("<tr>").append(
+//     $("<td>").text(hikerName),
+//     $("<td>").text(HIKENAME),
+//     $("<td>").text(moment(hikeDate).format("MMM Do YYYY")),
+//     $("<td>").text(HIKEDISTANCE),
+//     $("<td>").text(formattedHikeTime),
+//     $("<td>").text(avgSpeed)
+//   );
+
+  })
+
+})
