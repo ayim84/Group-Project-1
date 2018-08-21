@@ -297,31 +297,29 @@ $(document).ready(function () {
 
 
 
-        var hikeLength = moment(endTime, "HH:mm").diff(moment(startTime, "HH:mm"), "minutes");
-        var hikeHours = Math.floor(hikeLength / 60);
-        var hikeMinutes = (hikeLength % 60);
+        var hikeTime = moment(endTime, "HH:mm").diff(moment(startTime, "HH:mm"), "minutes");
+        var hikeHours = Math.floor(hikeTime / 60);
+        var hikeMinutes = (hikeTime % 60);
         var formattedHikeTime = (hikeHours + " hrs " + hikeMinutes + " min");
-        var avgSpeed = (DISTANCE / hikeLength) * 60;
-
-
-        console.log(hikerName);
-        // console.log(HIKENAME);
-        console.log(moment(hikeDate).format("MMM Do YYYY"));
-        // console.log(HIKEDISTANCE);
-        console.log(formattedHikeTime);
-        console.log(avgSpeed);
-
+        var avgSpeed = ((currentHike.length / hikeTime) * 60);
+        var prettySpeed = avgSpeed.toFixed(2);
+        
+        
 
 
         // Create the new row
-        //   var newRow = $("<tr>").append(
-        //     $("<td>").text(hikerName),
-        //     $("<td>").text(HIKENAME),
-        //     $("<td>").text(moment(hikeDate).format("MMM Do YYYY")),
-        //     $("<td>").text(HIKEDISTANCE),
-        //     $("<td>").text(formattedHikeTime),
-        //     $("<td>").text(avgSpeed)
-        //   );
+          var newRow = $("<tr>").prepend(
+            $("<td>").text(hikerName),
+            $("<td>").text(currentHike.name),
+            $("<td>").text(moment(hikeDate).format("MMM Do YYYY")),
+            $("<td>").text(currentHike.length),
+            $("<td>").text(formattedHikeTime),
+            $("<td>").text(prettySpeed)
+          );
+
+  // Prepend the new row to the table
+  $("#user-hike-table > tbody").prepend(newRow);
+
 
     })
 

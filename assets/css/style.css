@@ -84,6 +84,10 @@ h2 {
     border: none;
 }
 
+#user-hikes {
+    background-color: antiquewhite;
+}
+
 footer {
     font-size: 1vw;
     position: fixed;

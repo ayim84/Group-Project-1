@@ -70,12 +70,39 @@
     </div>
     <div id="trails" class="jumbotron">
     </div>
-    <footer>
+
+    <!-- RECENT USER HIKES -->
+   
+
+
+    <table class="table" id="user-hike-table">
+        <thead class="thead-dark">
+        <tr>
+            <th>RECENT USER HIKES</th>
+        </tr>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Hike Completed</th>
+            <th scope="col">Date</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Time to Complete</th>
+            <th scope="col">Average MPH</th>
+          </tr>
+        </thead>
+        <tbody id="user-hikes">
+          <tr>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    <!-- <footer>
         <p class="lead">Zero Mark: The spot where a measured trail begins; may or may not be the trailhead.</p>
 
         <i class="fas fa-copyright"></i>
         <span id="footer-text">2018 Zero Mark</span>
-    </footer>
+    </footer> -->
     <div class="modal fade" id="hikeInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -132,7 +159,7 @@
                     </div>
 
                 </div>
-                
+
                 <!-- SHARE HIKE BUTTON -->
                 <div class="modal-footer">
                     <button type="button" id="submitHike-btn" class="btn-submitHike" data-dismiss="modal">Submit</button>
