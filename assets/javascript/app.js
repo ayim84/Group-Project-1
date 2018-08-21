@@ -11,6 +11,7 @@
   
   var database = firebase.database();
 
+
 // END FIREBASE INITIALIZATION
   
 
@@ -232,15 +233,16 @@ function initMap()
   
     // Grabs user input
     var hikerName = $("#hiker-name").val().trim();
-    var startTime = $("#start-time").val().trim();
-    var endTime = $("#end-time").val().trim();
+    var startTime = $("#start-time").val();
+    var endTime = $("#end-time").val();
     
   
     // Creates local "temporary" object for holding hike data
     var logHike = {
       name: hikerName,
       start: startTime,
-      end: endTime
+      end: endTime,
+      timestamp: firebase.database.ServerValue.TIMESTAMP
     };
   
     
@@ -248,11 +250,13 @@ function initMap()
     // Uploads employee data to the database
     database.ref().push(logHike);
 
+    console.log(logHike)
+
 //    TEMP FOR TESTING
     console.log(hikerName);
     console.log(startTime);
     console.log(endTime);
 
-    
+
 
   });

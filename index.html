@@ -110,19 +110,27 @@
                             </div>
                             <input type="text" id="hiker-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Your name please">
                         </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Start Time</span>
-                            </div>
-                            <input type="text" id="start-time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="What time did you start your hike?">
+
+
+<!-- HIKE START TIME INPUT -->
+                       
+
+                        <div class="control">
+                            <label for="appt-time">Hike Start Time:</label>
+                            <input type="time" id="start-time"/>
                         </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">End Time</span>
-                            </div>
-                            <input type="text" id="end-time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="What time did you finish your hike?">
-                        </div>
+
+
+
+<!-- HIKE END TIME INPUT -->
+                        
+
+                    <div class="control">
+                        <label for="appt-time">Hike End Time:</label>
+                        <input type="time" id="end-time"/>
                     </div>
+
+
                     <!-- SHARE HIKE BUTTON -->
                     <div class="modal-footer">
                         <button type="button" id="submitHike-btn" class="btn-submitHike" data-dismiss="modal">Submit</button>
