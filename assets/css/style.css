@@ -60,7 +60,6 @@ footer {
     font-size: 1vw;
 }
 
-
 h2 {
     font-family: 'Permanent Marker', cursive;
     letter-spacing: 10px;
@@ -78,3 +77,138 @@ h2 {
 .modal-body{
     margin-right:3%;
 }
+
+.googleMap {
+    width: 740px;
+    height: 330px;
+    border: none;
+}
+
+@media screen and (max-width: 1350px) {
+  .googleMap {
+    width: 100%;
+    height: 100%;
+  }
+  }
+
+@media screen and (max-width: 1200px) {
+    .googleMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    #trailInfo {
+        height: 100%;
+    }
+
+
+    .btn-primary {
+        margin-bottom: 1%;
+    }
+
+    #UserSearchInput {
+        height: 3rem;
+        font-size: 2.5vw;
+        margin-bottom: 1.5rem;
+    }
+
+    }
+
+@media screen and (max-width: 1075px) {
+        .googleMap {
+          width: 100%;
+          height: 100%;
+        }
+
+        body {
+            margin-top: 0;
+            background-image: url("../images/jumbotron2.jpg");
+            background-size: 125%;
+            background-repeat: no-repeat;
+            
+        }
+    
+        #trailInfo {
+            height: 100%;
+        }
+    
+    
+        .btn-primary {
+            margin-bottom: 1%;
+        }
+    
+        #UserSearchInput {
+            height: 3rem;
+            font-size: 2.5vw;
+            margin-bottom: 1.5rem;
+        }
+    
+        }
+
+@media screen and (max-width: 575px) {
+        .googleMap {
+        width: 100%;
+        height: 100%;
+        }
+    
+        #trailMap {
+            margin-top: 10%;
+        }
+
+        button {
+            margin-top: 2%;
+        }
+
+       footer {
+           background: black;
+           color: #F8F5F0;
+           font-size: 1.5vw;
+       }
+
+       .lead {
+        font-family: 'Permanent Marker', cursive;
+        color:#F8F5F0;
+        letter-spacing: 5px;
+        font-size: 2vw;
+        padding-top: 1%;
+    }
+
+       #footer-text {
+        font-family: 'Holtwood One SC', serif;
+    }
+    
+
+        }
+
+@media screen and (max-width: 575px) {
+        .googleMap {
+          margin-top: 20%;
+        width: 100%;
+          height: 330px;
+        }
+    
+        button {
+            margin-top: 2%;
+        }
+
+       footer {
+           background: black;
+           color: #F8F5F0;
+           font-size: 1.5vw;
+       }
+
+       .lead {
+        font-family: 'Permanent Marker', cursive;
+        color:#F8F5F0;
+        letter-spacing: 5px;
+        font-size: 2vw;
+        padding-top: 1%;
+    }
+
+       #footer-text {
+        font-family: 'Holtwood One SC', serif;
+    }
+    
+
+        }
+  
