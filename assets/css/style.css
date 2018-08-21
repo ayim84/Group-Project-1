@@ -1,13 +1,22 @@
+h1, h2, footer {
+    text-align: center;
+    color: black;
+}
+
+body, footer, .card-body{
+    background-color: #F8F5F0;
+}
+
 body {
     margin-top: 0;
     background-image: url("../images/jumbotron2.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
-    background-color: #F8F5F0;
+    
     
 }
-.jumbotron {
 
+.jumbotron {
     padding-left: 16%;
     padding-top: 1%;
     margin-top: 5%;
@@ -23,8 +32,6 @@ body {
     height: 5rem;
     font-size: 3.5vw;
     margin-bottom: 1.5rem;
-
-
 }
 
 
@@ -36,16 +43,8 @@ body {
 
 h1 {
     font-size: 5vw;
-    color: black;
-    text-align: center;
     padding-top: 2%;
     font-family: 'Holtwood One SC', serif;
-
-
-}
-
-button {
-    margin-bottom: 2%;
 }
 
 #trailInfo {
@@ -58,20 +57,12 @@ button {
 }
 
 footer {
-    text-align: center;
     font-size: 1vw;
-    background-color: #F8F5F0;
-
 }
 
-.card-body {
-    background-color: #F8F5F0;
-}
 
 h2 {
-    text-align: center;
     font-family: 'Permanent Marker', cursive;
-    color: black;
     letter-spacing: 10px;
     font-size: 2.5vw;
 }
@@ -87,12 +78,3 @@ h2 {
 .modal-body{
     margin-right:3%;
 }
-
-.selectedTrailPhoto {
-    margin: auto;
-}
-
-.container {
-    padding-bottom: 50%;
-}
-
