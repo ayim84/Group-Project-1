@@ -80,8 +80,6 @@ $(document).ready(function()
                     9: "J"
                 };
 
-                console.log(trailNumber["0"]);
-
                 trailLocations = [];  
                 
                 $("#trails").html("<h3>Pick a Hike!</h3>");
@@ -119,7 +117,7 @@ $(document).ready(function()
                     $("#trails").append(trailName);
                     $("#trails").append(trailList);
                 }
-                console.log(trailLocations);
+                console.log("Array of trails returned by Trail API: " + trailLocations);
 
                 $(document).on("click", ".clickedHike", function(){
                     var id = $(this).attr("id");
@@ -174,7 +172,7 @@ function initMap()
     // create an array of markers based on a given "locations" array.
     // The map() method here has nothing to do with the Google Maps API.
     var markers = trailLocations.map(function(location, i) {
-        console.log(location);
+        //console.log(location);
       var marker = new google.maps.Marker({
         position: location,
         label: labels[i % labels.length],
@@ -189,11 +187,32 @@ function initMap()
 
       google.maps.event.addListener(marker, 'click', function() 
       {
-          console.log("Marker Click Found!");
-          console.log(this);
-          // map.setZoom(8);
-          // map.setCenter(marker.getPosition());
+        console.log(location.lat);
+        console.log(this);
+        // map.setZoom(8);
+        // map.setCenter(marker.getPosition());
+        $(".hikeName").text(this.name);
+        $(".card-text").text(this.summary);
+        $("#trailInfoImage").attr("src", this.image);
+        $(".card-img-top").attr("src", this.image);
+        $("#mileage").text("Miles: " + this.length);
+        $("#elevationGain").text("Elevation Gain: ");
+        $("#difficulty").text("Difficulty: " + this.difficulty);
+        $("#stars").text("Stars: " + this.stars);
       });
+
+      var googleDirections= $("<iframe allowfullscreen>");
+        googleDirections.attr
+        (
+            {
+                "width": "600",
+                "height": "450",
+                "frameborder": "0",
+                "style": "border: 0",
+                "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + location.lat + "," + location.lng
+            }
+        )
+      $("#directions").html(googleDirections);
 
       return marker;
     });
