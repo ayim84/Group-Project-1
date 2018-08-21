@@ -29,6 +29,9 @@ var trailLocations = [
     {lat: 39.8505, lng: -105.3606}
 ];
 
+var currentHikeArray;
+var currentHike; //This is the object that has the trail data
+
 $(document).ready(function()
 {
     $("#searchForm").on("submit", function(event)
@@ -64,7 +67,7 @@ $(document).ready(function()
                 method: "GET"
             }).then(function(response)
             {
-                
+                currentHikeArray = response.trails;
 
                 console.log(response.trails[0]);
 
@@ -98,7 +101,8 @@ $(document).ready(function()
                             length: response.trails[i].length,
                             ascent: response.trails[i].ascent,
                             difficulty: response.trails[i].difficulty,
-                            stars: response.trails[i].stars
+                            stars: response.trails[i].stars,
+                            id: i
                         })
 
                     
@@ -124,10 +128,14 @@ $(document).ready(function()
                 $(document).on("click", ".clickedHike", function(){
                     var id = $(this).attr("id");
                     console.log("ID: " + id);
+                    currentHike = currentHikeArray[id];
+                    console.log(currentHike);
                     
+                    $("#trailInfo button").prop("disabled", false);
+
                     $(".hikeName").text(response.trails[id].name);
                     $(".card-text").text(response.trails[id].summary);
-                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgMedium);
                     $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
                     $("#mileage").text("Miles: " + response.trails[id].length);
                     $("#elevationGain").text("Elevation Gain: " + response.trails[id].ascent + "'");
@@ -138,8 +146,8 @@ $(document).ready(function()
                     googleDirections.attr
                     (
                         {
-                            "width": "600",
-                            "height": "450",
+                            "width": "490",
+                            "height": "300",
                             "frameborder": "0",
                             "style": "border: 0",
                             "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + response.trails[id].latitude + "," + response.trails[id].longitude,
@@ -207,13 +215,18 @@ function initMap()
         length: location.length,
         ascent: location.ascent,
         difficulty: location.difficulty,
-        stars: location.stars
+        stars: location.stars,
+        id: location.id
       });
 
       google.maps.event.addListener(marker, 'click', function() 
       {
         console.log(location.lat);
-        console.log(this);
+        console.log(this.id);
+
+        currentHike = currentHikeArray[this.id];
+        $("#trailInfo button").prop("disabled", false);
+        console.log(currentHike);
 
         getWeather(location.lat, location.lng);
 
