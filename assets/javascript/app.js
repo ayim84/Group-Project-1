@@ -34,11 +34,12 @@ var currentHike; //This is the object that has the trail data
 
 $(document).ready(function()
 {
+    $('#trails').hide()
   
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
-
+        $('#trails').show()
         var location = $("#UserSearchInput").val();
         console.log("User Inputted Location: " + location);
 
