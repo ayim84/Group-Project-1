@@ -132,7 +132,6 @@ $(document).ready(function()
                     $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
                     $("#stars").text("Stars: " + response.trails[id].stars);
 
-                    $("#form-button").show();
 
                     var googleDirections= $("<iframe allowfullscreen>");
                     googleDirections.attr
