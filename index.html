@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-sm-4">
-                <div id="trailInfo" class="card clearfix">
+                <div id="trailInfo" class="card">
                     <div class="selectedTrailPhoto">
                         <img class="card-img-top" src="assets/images/adventure-alps-backpack-554609.jpg" alt="Card image cap">
                     </div>
@@ -56,7 +56,7 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hikeInformation">
                             Trail Information
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hikedForm">
+                        <button id="form-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#hikedForm" style="display:none">
                             I Just Hiked This Trail!
                         </button>
 
@@ -77,19 +77,19 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="hikeName">Hike Name</h5>
+                    <h5 class="hikeName">Select a Hike!</h5>
                 </div>
                 <div class="selectedTrailPhoto">
                     <img id="trailInfoImage" src="assets/images/adventure-alps-backpack-554609.jpg" width="100%">
                 </div>
                 <div class="modal-body clearfix">
 
-                    <div id="mileage">Miles</div>
-                    <div id="elevationGain">Elevation Gain</div>
-                    <div id="difficulty">Difficulty</div>
-                    <div id="stars">Stars</div>
-                    <div id="weather">Weather</div>
-                    <div id="directions">Directions</div>
+                    <div id="mileage"></div>
+                    <div id="elevationGain"></div>
+                    <div id="difficulty"></div>
+                    <div id="stars"></div>
+                    <div id="weather"></div>
+                    <div id="directions"></div>
                 </div>
                 <!-- HIKE INFO BUTTON-->
                 <div class="modal-footer">

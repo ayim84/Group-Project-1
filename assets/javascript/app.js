@@ -29,8 +29,10 @@ var trailLocations = [
     {lat: 39.8505, lng: -105.3606}
 ];
 
+
 $(document).ready(function()
 {
+  
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
@@ -123,12 +125,14 @@ $(document).ready(function()
                     var id = $(this).attr("id");
                     $(".hikeName").text(response.trails[id].name);
                     $(".card-text").text(response.trails[id].summary);
-                    $("#trailInfoImage").attr("src", response.trails[id].imgMedium);
-                    $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $(".card-img-top").attr("src", response.trails[id].imgSmall);
                     $("#mileage").text("Miles: " + response.trails[id].length);
                     $("#elevationGain").text("Elevation Gain: ");
                     $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
                     $("#stars").text("Stars: " + response.trails[id].stars);
+
+                    $("#form-button").show();
 
                     var googleDirections= $("<iframe allowfullscreen>");
                     googleDirections.attr
