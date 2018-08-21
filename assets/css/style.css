@@ -3,6 +3,7 @@ body {
     background-image: url("../images/jumbotron2.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
+    background-color: #F8F5F0;
     
 }
 .jumbotron {
@@ -52,7 +53,8 @@ button {
 }
 
 .card-img-top {
-    height: 15vw;
+    height: 100%;
+    width: 100%;
 }
 
 footer {
@@ -88,5 +90,9 @@ h2 {
 
 .selectedTrailPhoto {
     margin: auto;
+}
+
+.container {
+    padding-bottom: 50%;
 }
 

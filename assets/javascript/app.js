@@ -125,7 +125,7 @@ $(document).ready(function()
                     var id = $(this).attr("id");
                     $(".hikeName").text(response.trails[id].name);
                     $(".card-text").text(response.trails[id].summary);
-                    $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
+                    $("#trailInfoImage").attr("src", response.trails[id].imgMedium);
                     $(".card-img-top").attr("src", response.trails[id].imgSmallMed);
                     $("#mileage").text("Miles: " + response.trails[id].length);
                     $("#elevationGain").text("Elevation Gain: ");
@@ -136,8 +136,8 @@ $(document).ready(function()
                     googleDirections.attr
                     (
                         {
-                            "width": "600",
-                            "height": "450",
+                            "width": "490",
+                            "height": "300",
                             "frameborder": "0",
                             "style": "border: 0",
                             "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + response.trails[id].latitude + "," + response.trails[id].longitude,
