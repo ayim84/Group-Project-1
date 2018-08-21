@@ -29,14 +29,17 @@ var trailLocations = [
     {lat: 39.8505, lng: -105.3606}
 ];
 
+var currentHikeArray;
+var currentHike; //This is the object that has the trail data
 
 $(document).ready(function()
 {
+    $('#trails').hide()
   
     $("#searchForm").on("submit", function(event)
     {
         event.preventDefault();
-
+        $('#trails').show()
         var location = $("#UserSearchInput").val();
         console.log("User Inputted Location: " + location);
 
@@ -56,7 +59,7 @@ $(document).ready(function()
             console.log("Latitude from User Input: " + lat);
             console.log("Longitude from user Input: " + long);
     
-            var hikingProjectQueryURL = "https://www.hikingproject.com/data/get-trails?key=200337065-b63aa83fc2f455dc1c697f8710938ca8&lat=" + lat + "&lon=" + long;
+            var hikingProjectQueryURL = "https://www.hikingproject.com/data/get-trails?key=200337065-b63aa83fc2f455dc1c697f8710938ca8&sort=distance&lat=" + lat + "&lon=" + long;
     
             console.log(hikingProjectQueryURL);
     
@@ -66,6 +69,8 @@ $(document).ready(function()
                 method: "GET"
             }).then(function(response)
             {
+                currentHikeArray = response.trails;
+
                 console.log(response.trails[0]);
 
                 var trailNumber = 
@@ -98,7 +103,8 @@ $(document).ready(function()
                             length: response.trails[i].length,
                             ascent: response.trails[i].ascent,
                             difficulty: response.trails[i].difficulty,
-                            stars: response.trails[i].stars
+                            stars: response.trails[i].stars,
+                            id: i
                         })
 
                     
@@ -123,16 +129,21 @@ $(document).ready(function()
 
                 $(document).on("click", ".clickedHike", function(){
                     var id = $(this).attr("id");
+                    console.log("ID: " + id);
+                    currentHike = currentHikeArray[id];
+                    console.log(currentHike);
+                    
+                    $("#trailInfo button").prop("disabled", false);
+
                     $(".hikeName").text(response.trails[id].name);
                     $(".card-text").text(response.trails[id].summary);
                     $("#trailInfoImage").attr("src", response.trails[id].imgSmallMed);
                     $(".card-img-top").attr("src", response.trails[id].imgSmall);
                     $("#mileage").text("Miles: " + response.trails[id].length);
-                    $("#elevationGain").text("Elevation Gain: ");
+                    $("#elevationGain").text("Elevation Gain: " + response.trails[id].ascent + "'");
                     $("#difficulty").text("Difficulty: " + response.trails[id].difficulty);
                     $("#stars").text("Stars: " + response.trails[id].stars);
-
-
+                
                     var googleDirections= $("<iframe allowfullscreen>");
                     googleDirections.attr
                     (
@@ -146,8 +157,11 @@ $(document).ready(function()
                     )
                     console.log(googleDirections);
                     $("#directions").html(googleDirections);
+
+                    getWeather(response.trails[id].latitude, response.trails[id].longitude);
+
                 });
-                   
+            
                 $("#UserSearchInput").val("");
       
 
@@ -157,6 +171,24 @@ $(document).ready(function()
         });
     });
 });
+
+function getWeather(lat, long)
+{
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?APPID=8d9034659152ad4acebd9a50878badc9&units=imperial&lat=" + lat + "&lon=" + long;
+
+    console.log("OpenWeatherMap URL :" + openWeatherURL);
+
+    $.ajax(
+        {
+            url: openWeatherURL,
+            method: "GET"
+        }).then(function(res)
+    {
+        console.log(res.main.temp);
+        console.log("Inside Weather Function");
+        $("#weather").html("Weather: " + res.main.temp + " &#176;F");
+    });
+}
 
 function initMap() 
 {
@@ -175,7 +207,7 @@ function initMap()
     // create an array of markers based on a given "locations" array.
     // The map() method here has nothing to do with the Google Maps API.
     var markers = trailLocations.map(function(location, i) {
-        //console.log(location);
+        console.log(location);
       var marker = new google.maps.Marker({
         position: location,
         label: labels[i % labels.length],
@@ -185,21 +217,27 @@ function initMap()
         length: location.length,
         ascent: location.ascent,
         difficulty: location.difficulty,
-        stars: location.stars
+        stars: location.stars,
+        id: location.id
       });
 
       google.maps.event.addListener(marker, 'click', function() 
       {
         console.log(location.lat);
-        console.log(this);
-        // map.setZoom(8);
-        // map.setCenter(marker.getPosition());
+        console.log(this.id);
+
+        currentHike = currentHikeArray[this.id];
+        $("#trailInfo button").prop("disabled", false);
+        console.log(currentHike);
+
+        getWeather(location.lat, location.lng);
+
         $(".hikeName").text(this.name);
         $(".card-text").text(this.summary);
         $("#trailInfoImage").attr("src", this.image);
         $(".card-img-top").attr("src", this.image);
         $("#mileage").text("Miles: " + this.length);
-        $("#elevationGain").text("Elevation Gain: ");
+        $("#elevationGain").text("Elevation Gain: " + this.ascent + "'");
         $("#difficulty").text("Difficulty: " + this.difficulty);
         $("#stars").text("Stars: " + this.stars);
       });
