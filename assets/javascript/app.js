@@ -235,7 +235,7 @@ $(document).ready(function () {
 })
 
 function getWeather(lat, long) {
-    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?APPID=8d9034659152ad4acebd9a50878badc9&units=imperial&lat=" + lat + "&lon=" + long;
+    var openWeatherURL = "https://api.openweathermap.org/data/2.5/weather?APPID=8d9034659152ad4acebd9a50878badc9&units=imperial&lat=" + lat + "&lon=" + long;
 
     //console.log("OpenWeatherMap URL :" + openWeatherURL);
 
