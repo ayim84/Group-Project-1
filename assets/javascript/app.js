@@ -280,6 +280,8 @@ function initMap() {
             id: location.id
         });
 
+// REFRESH COMMENT
+
         google.maps.event.addListener(marker, 'click', function () {
             //console.log(location.lat);
             //console.log(this.id);
