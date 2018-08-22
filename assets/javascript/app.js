@@ -1,3 +1,10 @@
+var lat;
+var long; 
+var trailLocations;
+
+var currentHikeArray;
+var currentHike; //This is the object that has the trail data
+
 $(document).ready(function () {
     $('#trails').hide()
     // Initialize Firebase
@@ -17,30 +24,13 @@ $(document).ready(function () {
     // END FIREBASE INITIALIZATION
 
 
-    var lat = 39.7392358;
-    var long = -104.990251;
-    var trailLocations = [
-        { lat: 39.9787, lng: -105.2755 },
-        { lat: 39.9511, lng: -105.3378 },
-        { lat: 39.9997, lng: -105.2979 },
-        { lat: 40.02, lng: -105.2979 },
-        { lat: 40.0202, lng: -105.2977 },
-        { lat: 39.9388, lng: -105.2582 },
-        { lat: 39.9975, lng: -105.2928 },
-        { lat: 39.7736, lng: -105.2541 },
-        { lat: 39.7169, lng: -105.3156 },
-        { lat: 39.8505, lng: -105.3606 }
-    ];
 
-
-    var currentHikeArray;
-    var currentHike; //This is the object that has the trail data
 
     $("#searchForm").on("submit", function (event) {
         event.preventDefault();
         $('#trails').show()
         var location = $("#UserSearchInput").val();
-        console.log("User Inputted Location: " + location);
+        //console.log("User Inputted Location: " + location);
 
         var googleMapsQueryURL = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&address=" + location;
 
@@ -50,16 +40,16 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (response) {
                 var googleMapsResults = response.results[0];
-                console.log("Google Maps API Return: " + googleMapsResults);
+                //console.log("Google Maps API Return: " + googleMapsResults);
 
                 lat = googleMapsResults.geometry.location.lat;
                 long = googleMapsResults.geometry.location.lng;
-                console.log("Latitude from User Input: " + lat);
-                console.log("Longitude from user Input: " + long);
+                //console.log("Latitude from User Input: " + lat);
+                //console.log("Longitude from user Input: " + long);
 
                 var hikingProjectQueryURL = "https://www.hikingproject.com/data/get-trails?key=200337065-b63aa83fc2f455dc1c697f8710938ca8&sort=distance&lat=" + lat + "&lon=" + long;
 
-                console.log(hikingProjectQueryURL);
+                //console.log(hikingProjectQueryURL);
 
                 $.ajax(
                     {
@@ -68,7 +58,7 @@ $(document).ready(function () {
                     }).then(function (response) {
                         currentHikeArray = response.trails;
 
-                        console.log(response.trails[0]);
+                        //console.log(response.trails[0]);
 
                         var trailNumber =
                         {
@@ -121,11 +111,11 @@ $(document).ready(function () {
                             $("#trails").append(trailName);
                             $("#trails").append(trailList);
                         }
-                        console.log("Array of trails returned by Trail API: " + trailLocations);
+                        //console.log("Array of trails returned by Trail API: " + trailLocations);
 
                         $(document).on("click", ".clickedHike", function () {
                             var id = $(this).attr("id");
-                            console.log("ID: " + id);
+                           //console.log("ID: " + id);
                             currentHike = currentHikeArray[id];
                             console.log(currentHike);
 
@@ -151,7 +141,7 @@ $(document).ready(function () {
                                     "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + response.trails[id].latitude + "," + response.trails[id].longitude,
                                 }
                                 )
-                            console.log(googleDirections);
+                            //console.log(googleDirections);
                             $("#directions").html(googleDirections);
 
                             getWeather(response.trails[id].latitude, response.trails[id].longitude);
@@ -168,93 +158,7 @@ $(document).ready(function () {
     });
 
 
-    function getWeather(lat, long) {
-        var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?APPID=8d9034659152ad4acebd9a50878badc9&units=imperial&lat=" + lat + "&lon=" + long;
-
-        console.log("OpenWeatherMap URL :" + openWeatherURL);
-
-        $.ajax(
-            {
-                url: openWeatherURL,
-                method: "GET"
-            }).then(function (res) {
-                console.log(res.main.temp);
-                console.log("Inside Weather Function");
-                $("#weather").html("Weather: " + res.main.temp + " &#176;F");
-            });
-    }
-
-    function initMap() {
-        console.log("Lat for current Google Map: " + lat + " Long for current Google Map: " + long);
-
-        var map = new google.maps.Map(document.getElementById('trailMap'), {
-            zoom: 9,
-            center: { lat: lat, lng: long }
-        });
-
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = trailLocations.map(function (location, i) {
-            console.log(location);
-            var marker = new google.maps.Marker({
-                position: location,
-                label: labels[i % labels.length],
-                name: location.name,
-                summary: location.summary,
-                image: location.image,
-                length: location.length,
-                ascent: location.ascent,
-                difficulty: location.difficulty,
-                stars: location.stars,
-                id: location.id
-            });
-
-            google.maps.event.addListener(marker, 'click', function () {
-                console.log(location.lat);
-                console.log(this.id);
-
-                currentHike = currentHikeArray[this.id];
-                $("#trailInfo button").prop("disabled", false);
-                console.log(currentHike);
-
-                getWeather(location.lat, location.lng);
-
-                $(".hikeName").text(this.name);
-                $(".card-text").text(this.summary);
-                $("#trailInfoImage").attr("src", this.image);
-                $(".card-img-top").attr("src", this.image);
-                $("#mileage").text("Miles: " + this.length);
-                $("#elevationGain").text("Elevation Gain: " + this.ascent + "'");
-                $("#difficulty").text("Difficulty: " + this.difficulty);
-                $("#stars").text("Stars: " + this.stars);
-            });
-
-            var googleDirections = $("<iframe allowfullscreen>");
-            googleDirections.attr
-                (
-                {
-                    "width": "600",
-                    "height": "450",
-                    "frameborder": "0",
-                    "style": "border: 0",
-                    "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + location.lat + "," + location.lng
-                }
-                )
-            $("#directions").html(googleDirections);
-
-            return marker;
-        });
-
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-    };
-
+    
     // SHARE YOUR HIKE SUBMISSION
 
     // HIKE SHARE SUBMIT BUTTON
@@ -324,3 +228,90 @@ $(document).ready(function () {
     })
 
 })
+
+function getWeather(lat, long) {
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?APPID=8d9034659152ad4acebd9a50878badc9&units=imperial&lat=" + lat + "&lon=" + long;
+
+    //console.log("OpenWeatherMap URL :" + openWeatherURL);
+
+    $.ajax(
+        {
+            url: openWeatherURL,
+            method: "GET"
+        }).then(function (res) {
+            //console.log(res.main.temp);
+            //console.log("Inside Weather Function");
+            $("#weather").html("Weather: " + res.main.temp + " &#176;F");
+        });
+}
+
+function initMap() {
+    //console.log("Lat for current Google Map: " + lat + " Long for current Google Map: " + long);
+
+    var map = new google.maps.Map(document.getElementById('trailMap'), {
+        zoom: 9,
+        center: { lat: lat, lng: long }
+    });
+
+    // Create an array of alphabetical characters used to label the markers.
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // Add some markers to the map.
+    // Note: The code uses the JavaScript Array.prototype.map() method to
+    // create an array of markers based on a given "locations" array.
+    // The map() method here has nothing to do with the Google Maps API.
+    var markers = trailLocations.map(function (location, i) {
+        //console.log(location);
+        var marker = new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length],
+            name: location.name,
+            summary: location.summary,
+            image: location.image,
+            length: location.length,
+            ascent: location.ascent,
+            difficulty: location.difficulty,
+            stars: location.stars,
+            id: location.id
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            //console.log(location.lat);
+            //console.log(this.id);
+
+            currentHike = currentHikeArray[this.id];
+            $("#trailInfo button").prop("disabled", false);
+            console.log(currentHike);
+
+            getWeather(location.lat, location.lng);
+
+            $(".hikeName").text(this.name);
+            $(".card-text").text(this.summary);
+            $("#trailInfoImage").attr("src", this.image);
+            $(".card-img-top").attr("src", this.image);
+            $("#mileage").text("Miles: " + this.length);
+            $("#elevationGain").text("Elevation Gain: " + this.ascent + "'");
+            $("#difficulty").text("Difficulty: " + this.difficulty);
+            $("#stars").text("Stars: " + this.stars);
+        });
+
+        var googleDirections = $("<iframe allowfullscreen>");
+        googleDirections.attr
+            (
+            {
+                "width": "600",
+                "height": "450",
+                "frameborder": "0",
+                "style": "border: 0",
+                "src": "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCZHm522MDtZTsy5gXFX2ni9rsUYdKXCh4&origin=" + lat + "," + long + "&destination=" + location.lat + "," + location.lng
+            }
+            )
+        $("#directions").html(googleDirections);
+
+        return marker;
+    });
+
+    // Add a marker clusterer to manage the markers.
+    var markerCluster = new MarkerClusterer(map, markers,
+        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+};
