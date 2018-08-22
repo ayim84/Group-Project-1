@@ -1,5 +1,5 @@
 var lat;
-var long; 
+var long;
 var trailLocations;
 
 var currentHikeArray;
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
                         $(document).on("click", ".clickedHike", function () {
                             var id = $(this).attr("id");
-                           //console.log("ID: " + id);
+                            //console.log("ID: " + id);
                             currentHike = currentHikeArray[id];
                             console.log(currentHike);
 
@@ -158,14 +158,12 @@ $(document).ready(function () {
     });
 
 
-    
+
     // SHARE YOUR HIKE SUBMISSION
 
     // HIKE SHARE SUBMIT BUTTON
     $("#submitHike-btn").on("click", function (event) {
         event.preventDefault();
-
-
 
         // Grabs user input
         var hikerName = $("#hiker-name").val().trim();
@@ -173,18 +171,41 @@ $(document).ready(function () {
         var endTime = $("#end-time").val();
 
 
-        // Creates local "temporary" object for holding hike data (from Firebase I think...)
+
+        // Table Calculations
+        var hikeTime = moment(endTime, "HH:mm").diff(moment(startTime, "HH:mm"), "minutes");
+        var hikeHours = Math.floor(hikeTime / 60);
+        var hikeMinutes = (hikeTime % 60);
+        var formattedHikeTime = (hikeHours + " hrs " + hikeMinutes + " min");
+        var avgSpeed = ((currentHike.length / hikeTime) * 60);
+        var formattedSpeed = avgSpeed.toFixed(2);
+        var timestamp = firebase.database.ServerValue.TIMESTAMP;
+
+        var formattedDate = moment(timestamp).format("MMM Do YYYY");
+
+
+        // Store everything into a variable. I don't know why I need this...
+        // var hikerName = childSnapshot.val().name;
+        // var startTime = childSnapshot.val().start;
+        // var endTime = childSnapshot.val().end;
+        // var hikeDate = childSnapshot.val().timestamp;
+
+        // Create object to push to firebase
         var logHike = {
             name: hikerName,
             start: startTime,
             end: endTime,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+            timestamp: timestamp,
+            currenthike: currentHike.name,
+            hiketimeformatted: formattedHikeTime,
+            dateformatted: formattedDate,
+            hikelength: currentHike.length,
+            speedformatted: formattedSpeed
         };
 
-        // Uploads employee data to the database
+        // Uploads object data to the database
         database.ref().push(logHike);
 
-        console.log(logHike)
 
     })
 
@@ -193,36 +214,20 @@ $(document).ready(function () {
         console.log(childSnapshot.val());
 
 
-        // Store everything into a variable.
-        var hikerName = childSnapshot.val().name;
-        var startTime = childSnapshot.val().start;
-        var endTime = childSnapshot.val().end;
-        var hikeDate = childSnapshot.val().timestamp;
-
-
-
-        var hikeTime = moment(endTime, "HH:mm").diff(moment(startTime, "HH:mm"), "minutes");
-        var hikeHours = Math.floor(hikeTime / 60);
-        var hikeMinutes = (hikeTime % 60);
-        var formattedHikeTime = (hikeHours + " hrs " + hikeMinutes + " min");
-        var avgSpeed = ((currentHike.length / hikeTime) * 60);
-        var prettySpeed = avgSpeed.toFixed(2);
-        
-        
-
-
         // Create the new row
-          var newRow = $("<tr>").prepend(
-            $("<td>").text(hikerName),
-            $("<td>").text(currentHike.name),
-            $("<td>").text(moment(hikeDate).format("MMM Do YYYY")),
-            $("<td>").text(currentHike.length),
-            $("<td>").text(formattedHikeTime),
-            $("<td>").text(prettySpeed)
-          );
+        var newRow = $("<tr>").prepend(
+            $("<td>").text(childSnapshot.val().name),
+            $("<td>").text(childSnapshot.val().currenthike),
+            $("<td>").text(moment(database.dateformatted).format("MMM Do YYYY")),
+            $("<td>").text(childSnapshot.val().hikelength),
+            $("<td>").text(childSnapshot.val().hiketimeformatted),
+            $("<td>").text(childSnapshot.val().speedformatted)
+        );
 
-  // Prepend the new row to the table
-  $("#user-hike-table > tbody").prepend(newRow);
+        // Prepend the new row to the table
+        $("#user-hike-table > tbody").prepend(newRow);
+
+        $("#hiker-name, #start-time, #end-time").val("");
 
 
     })
